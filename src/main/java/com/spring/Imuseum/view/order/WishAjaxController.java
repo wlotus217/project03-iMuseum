@@ -19,8 +19,6 @@ public class WishAjaxController {
 	@Autowired
 	private WishService wishService;
 	
-	
-	//추가----------------------------------------------------------------------------
 	@ModelAttribute("wishCnt")
 	public int getWishCnt(Model model,@ModelAttribute("member") MemberVO mvo) {
 		int wishCnt = wishService.getWishCnt(mvo.getId());
@@ -64,7 +62,7 @@ public class WishAjaxController {
 		return result;
 	}
 	
-	@RequestMapping("/deleteWishList.do") //---------------------------------------------->이름수정???
+	@RequestMapping("/deleteWishList.do") 
 	public String deleteWish(WishVO vo, @ModelAttribute("member") MemberVO mvo) {
 		System.out.println(">> deleteWish() 실행 : 위시리스트 삭제");
 		vo.setId(mvo.getId());

@@ -60,7 +60,7 @@ public class OrderController {
 		}
 	}
 	
-	@RequestMapping("/insertOrder.do")//------------------------------------------------------------>수정
+	@RequestMapping("/insertOrder.do")
 	public String insertOrder(OrderVO vo, Model model, @ModelAttribute("member") MemberVO mvo) {
 		vo.setId(mvo.getId());
 		System.out.println(vo);
@@ -89,34 +89,6 @@ public class OrderController {
 		model.addAttribute("list5", list5);
 		return "admin/product_sale";
 	}
-	
-//	@RequestMapping("/productOrder.do")
-//	public String getOrderList(OrderVO vo, Model model) {
-//		List<OrderVO> list = orderService.getOrderList(vo);
-//		model.addAttribute("list", list);
-//		return "admin/product_ship";
-//	}
-//	
-//	@RequestMapping("/updateOrder.do")
-//	public String updateStatus(OrderVO vo) {
-//		System.out.println("updateOrder.do 실행");
-//		orderService.updateOrder(vo);
-//		return "redirect:productOrder.do";
-//	}
-//	
-//	@RequestMapping("/insertShipgo.do")
-//	public String insertShipgo(OrderVO vo, Model model) {
-//		OrderVO order = orderService.getShip(vo);
-//		model.addAttribute("order", order);
-//		return "admin/insertShip";
-//	}
-//	
-//	@RequestMapping("/updateShip.do")
-//	public String updateShip(ProductShipVO pvo, OrderVO ovo) {
-//		orderService.updateShip(pvo);
-//		orderService.updateStatus(ovo);
-//		return "redirect:productOrder.do";
-//	}
 	
 	@RequestMapping("/orderFail.do")
 	public String orderFail(String errorMsg, Model model) {

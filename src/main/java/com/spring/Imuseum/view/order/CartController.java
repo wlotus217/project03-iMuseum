@@ -39,7 +39,7 @@ public class CartController {
 			return cartCnt;
 		}
 	}
-	//추가-----------------------------------------------------------------------------------------------
+	
 	@Autowired
 	private WishService wishService;
 	
@@ -55,9 +55,7 @@ public class CartController {
 			return wishCnt;
 		}
 	}
-	//-------------------------------------------------------------------------------------------------
 	
-	//GET, POST 방식 요청을 모두 처리
 	@RequestMapping("/getCartList.do")
 	public String getCartList(CartVO vo, Model model, @ModelAttribute("member") MemberVO mvo) {
 		System.out.println(">> 카트 목록 보여주기");

@@ -25,7 +25,6 @@ public class OrderPageController {
 	@Autowired
 	private OrderPageService orderPageService;
 	
-//추가--------------------------------------------------------------------------
 	@Autowired
 	private CartService cartService;
 	
@@ -59,7 +58,6 @@ public class OrderPageController {
 			return wishCnt;
 		}
 	}
-//------------------------------------------------------------------------------------	
 	
 	@RequestMapping("/getOrderPage.do")
 	public String getOrderPage(OrderPageVO vo, Model model, @ModelAttribute("member") MemberVO mvo) {

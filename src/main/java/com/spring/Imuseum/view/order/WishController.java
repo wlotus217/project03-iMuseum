@@ -35,7 +35,6 @@ public class WishController {
 		}
 	}
 
-	//GET, POST 방식 요청을 모두 처리
 	@RequestMapping("/getWishList.do")
 	public String getWishList(WishVO vo, Model model, @ModelAttribute("member") MemberVO mvo) {
 		System.out.println(">> getWishList 실행 ");
