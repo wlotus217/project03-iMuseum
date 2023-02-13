@@ -41,10 +41,6 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<!-- <script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvnLt4QUXB59ZsNU2mzaeLmPhniiV0QnE&amp;language=en"></script> -->
 <title>상품상세페이지</title>
 <style>
 html {
@@ -560,7 +556,7 @@ html {
 </script>
 <script>
 	var count = 0;
-	$(document).on("click", "#like", function() {
+	/* $(document).on("click", "#like", function() {
 		count++;
 		if (count % 2 == 0) {
 			$("#like").removeClass("btn-area like-on")
@@ -569,7 +565,7 @@ html {
 			$("#like").removeClass("btn-area")
 			$("#like").addClass("btn-area like-on")
 		}
-	});
+	}); */
 
 	$(document).on("click", ".icon-question", function() {
 		count++;
@@ -658,6 +654,7 @@ window.onload = function(){
 //-----------------------------위시리스트 추가 / 삭제 ------------------------------------//
 	function insertWish(frm){
 		if(sessionStorage.getItem('member') != ''){
+			
 			$.ajax("wishCheck.do",{
 				type:"post",
 				data:$(frm).serialize(),
@@ -722,6 +719,7 @@ window.onload = function(){
 		} else {
 			if(confirm("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?")){
 				location.href="moveTologin.do";
+				return;
 			};
 			
 		}
