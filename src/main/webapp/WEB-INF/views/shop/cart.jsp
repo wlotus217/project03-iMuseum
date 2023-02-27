@@ -567,75 +567,64 @@ $("#selectOrderBtn").on("click", function(){
 
 
 //체크박스 전체선택 선택해제 -------------------------------------------------
-$(function(){
-	computeTotalPrice(checklist);
-	
-	var checklist = $(".cartProduct");
-	var rowCnt = checklist.length;
-	var totalPrice = 0;
-	var shipping = 3000;
-	var totalPS = 0;
-	
-	$("#allCheck").click(function(){
-		console.log("체크박스 클릭 이벤트 발생");
-		for (var i = 0; i< checklist.length; i++){
-			checklist[i].checked = this.checked;
-		}
-		if($("#allCheck")[0].checked == true){
-			totalPrice = 0;
-		}
-		
-		$(".cartProduct").trigger("change");
-		
-		if ($("#allCheck")[0].checked == false ){
-			totalPrice = 0;
-		}
-		
-	});
-	
-	$(".cartProduct").click(function(){
-		if($(".cartProduct:checked").length == rowCnt){
-			$("#allCheck")[0].checked = true;
-		} else{
-			$("#allCheck")[0].checked = false;
-		}
-	});
 
-	
-	$(".cartProduct").change(computeTotalPrice);
+let checkAll = document.getElementById('allCheck');	
+let checklist = $(".cartProduct");
+let totalPS = 0;
 
-	function computeTotalPrice(){
-		console.log("this:" );
-		console.log("this.checked: " + this.checked);
-		console.log("this.value: " + this.value);
-		console.log('$(this).prop("checked") : ' + $(this).prop("checked"));
-	
-		shipping = 3000;
-		
-		if (this.checked) {
-			totalPrice += parseInt(this.value);
-			console.log(totalPrice);
-			if(totalPrice >= 100000) {
-				shipping = 0;
-			} 
-		} else {
-			totalPrice -= parseInt(this.value);
-			if(totalPrice >= 100000) {
+// 체크박스가 클릭될 때마다 총 금액을 계산하는 함수
+function calculateTotal() {
+	let shipping = 3000;
+	let totalPrice = 0;
+	for (let i = 0; i < checklist.length; i++) {
+		if (checklist[i].checked) {
+			totalPrice += parseInt(checklist[i].value);
+			
+		    if(totalPrice >= 100000) {
 				shipping = 0;
 			} 
 		}
-		
-		if($(".cartProduct:checked").length == 0){
-			totalPrice = 0;
-			shipping = 0;
-		}
-		totalPS = totalPrice + shipping;
-		$("#total").text(numberWithCommas(totalPrice));
-		$("#shipping").text(numberWithCommas(shipping));
-		$("#totalPS").text(numberWithCommas(totalPS));
-	} 
+	}
 	
-});
+	if($(".cartProduct:checked").length == 0){
+		totalPrice = 0;
+		shipping = 0;
+	}
+	
+	totalPS = totalPrice + shipping;
+	$("#total").text(numberWithCommas(totalPrice));
+	$("#shipping").text(numberWithCommas(shipping));
+	$("#totalPS").text(numberWithCommas(totalPS));
+}
+
+// 전체체크 및 전체체크 해제 체크박스 클릭 시 모든 체크박스 상태 변경
+function toggleCheckAll() {
+	const isChecked = checkAll.checked;
+	for (let i = 0; i < checklist.length; i++){
+		checklist[i].checked = isChecked;
+	}
+ 	calculateTotal();
+}
+
+// 체크박스가 클릭될 때마다 calculateTotal 함수 호출
+for (let i = 0; i < checklist.length; i++) {
+	checklist[i].addEventListener('click', function() {
+    // 모든 체크박스가 체크되어 있는지 확인
+    let allChecked = true;
+    for (let j = 0; j < checklist.length; j++) {
+      if (!checklist[j].checked) {
+        allChecked = false;
+        break;
+      }
+    }
+    // 전체체크 박스 체크 상태 변경
+    checkAll.checked = allChecked;
+    calculateTotal();
+  });
+}
+
+// 전체체크 및 전체체크 해제 체크박스 클릭 시 toggleCheckAll 함수 호출
+checkAll.addEventListener('click', toggleCheckAll);
 
 
 //모달창 옵션값 전달하기 ------------------------------------------------------------------
