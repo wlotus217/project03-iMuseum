@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="orderDAO">
+<mapper namespace="com.spring.Imuseum.order.dao.OrderDAO">
 
-	<select id="getProductInfo" parameterType="orderPageP" resultType="orderPageP">
+	<select id="getPInfo" parameterType="orderPageP" resultType="orderPageP">
 		SELECT PRODUCT_NAME AS PRODUCTNAME, PRICE, PHOTO1 AS PHOTO , DISCOUNT
 		FROM PRODUCT
 		WHERE PRODUCT_NUM = #{productNum}
@@ -60,6 +60,8 @@
 		INSERT INTO PRODUCT_SHIP (ORDER_NUM)
 		VALUES(#{orderNum})
 	</insert>	
+	
+	
 	<!-- 현준 -->
 	<select id="getOrderList" parameterType="order" resultType="order">
 		<![CDATA[
@@ -139,10 +141,16 @@
 		WHERE ORDER_NUM = #{orderNum} 
 	</select>
 	
-	<update id="updateStatus" parameterType="order">
-		UPDATE ORDERS SET STATUS = '배송준비중' 
+	<update id="updateShipStatus" parameterType="order">
+		UPDATE ORDERS SET STATUS = '배송중' 
 		WHERE ORDER_NUM = #{orderNum}
 	</update>
+	
+	<update id="updateStatus" parameterType="order">
+		UPDATE ORDERS SET STATUS = #{status} 
+		WHERE ORDER_NUM = #{orderNum}
+	</update>
+	
 		
 </mapper>
 

@@ -3,6 +3,8 @@ package com.spring.Imuseum.order;
 import java.util.List;
 
 public interface OrderService {
+	List<OrderPagePVO> getPInfo(List<OrderPagePVO> orders);
+	
 	String insertOrders(OrderVO vo);
 	OrderVO getOrder(String orderNum);
 	OrderVO getShip(OrderVO vo);
@@ -16,6 +18,7 @@ public interface OrderService {
 	void updateShip(ProductShipVO vo);
 	void updateOrder(OrderVO vo);
 	void updateStatus(OrderVO vo);
+	void updateShipStatus(OrderVO vo);
 	void updateDate();
 	void deleteOrder(OrderVO vo);
 	

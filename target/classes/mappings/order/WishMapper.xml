@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="wishDAO">
+<mapper namespace="com.spring.Imuseum.order.dao.WishDAO">
 
 	<select id="getWishList" parameterType="string" resultType="wish">
 		SELECT * 

@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.spring.Imuseum.member.MemberVO;
 import com.spring.Imuseum.order.CartService;
 import com.spring.Imuseum.order.CartVO;
+import com.spring.Imuseum.order.OrderPagePVO;
+import com.spring.Imuseum.order.OrderPageVO;
 import com.spring.Imuseum.order.OrderService;
 import com.spring.Imuseum.order.OrderVO;
-import com.spring.Imuseum.order.ProductShipVO;
 import com.spring.Imuseum.order.WishService;
 
 @Controller
@@ -25,7 +26,6 @@ import com.spring.Imuseum.order.WishService;
 public class OrderController { 
 	@Autowired
 	private OrderService orderService;
-	
 	@Autowired
 	private WishService wishService;
 	@Autowired
@@ -59,6 +59,18 @@ public class OrderController {
 			return cartCnt;
 		}
 	}
+	
+	
+	@RequestMapping("/getOrderPage.do")
+	public String getOrderPage(OrderPageVO vo, Model model, @ModelAttribute("member") MemberVO mvo) {
+		List<OrderPagePVO> list = orderService.getPInfo(vo.getOrders());
+		System.out.println("orderList: " + list);
+		System.out.println("list.size: " + list.size());
+		model.addAttribute("orderList", list);
+		model.addAttribute("orderProductCnt", list.size());
+		return "shop/order";
+	}
+	
 	
 	@RequestMapping("/insertOrder.do")
 	public String insertOrder(OrderVO vo, Model model, @ModelAttribute("member") MemberVO mvo) {

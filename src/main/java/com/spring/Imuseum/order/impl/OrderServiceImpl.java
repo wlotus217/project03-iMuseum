@@ -1,6 +1,7 @@
 package com.spring.Imuseum.order.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,21 @@ public class OrderServiceImpl implements OrderService {
 	private OrderDAO orderDao;
 	@Autowired
 	private CartDAO cartDao;
+	
+	@Override
+	public List<OrderPagePVO> getPInfo(List<OrderPagePVO> orders) {
+		List<OrderPagePVO> result = new ArrayList<OrderPagePVO>();	
+		for(OrderPagePVO opp : orders) {
+			OrderPagePVO productInfo = orderDao.getPInfo(opp);	
+			productInfo.setProductNum(opp.getProductNum());	
+			productInfo.setProductCnt(opp.getProductCnt());	
+			productInfo.setProductOption(opp.getProductOption());	
+			productInfo.setCartNum(opp.getCartNum());	
+			
+			result.add(productInfo);
+		}
+		return result;
+	}
 	
 	@Override
 	public String insertOrders(OrderVO vo) {
@@ -97,6 +113,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public void updateStatus(OrderVO vo) {
 		orderDao.updateStatus(vo);
+	}
+	
+	@Override
+	public void updateShipStatus(OrderVO vo) {
+		orderDao.updateShipStatus(vo);
 	}
 
 	@Override
